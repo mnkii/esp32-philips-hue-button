@@ -1,15 +1,13 @@
 /**
  * See README.md for details
  *
- * Modify Config.h for your Wifi, Hue and Sonos setup
+ * Modify Config.h for your Wifi and Hue setup
  */
 #include "Config.h"
 #include <Arduino.h>
 #include <PinButton.h>
 #include "HueClient.h"
 #include "HueGroup.h"
-#include "HueLight.h"
-#include "Disco.h"
 #include "Led.h"
 #include <WiFi.h>
 #include <WiFiMulti.h>
@@ -25,10 +23,7 @@ bool longClick = false;
 PinButton button(BUTTON_PIN);
 Led led(LED_PIN);
 HueClient conn(HUE_IP, HUE_API_USERNAME);
-Sonos sonos(SONOS_ACCESS_TOKEN, SONOS_REFRESH_TOKEN, SONOS_CLIENT_CREDENTIALS);
 HueGroup group(conn, HUE_GROUP);
-HueLight lights(conn);
-Disco disco(lights, group, sonos, led);
 
 void setup()
 {
@@ -59,15 +54,12 @@ void loop()
     }
 
     if (button.isDoubleClick()) {
-        if (sceneIndex >= (sizeof scenes / sizeof scenes[0]) + 1) {
+        if (sceneIndex >= (sizeof scenes / sizeof scenes[0])) {
             sceneIndex = 0;
         }
-        if (sceneIndex < (sizeof scenes / sizeof scenes[0])) {
-            group.setScene(scenes[sceneIndex]);
-        }
-        else {
-            disco.launch(AUDIO_URL, SONOS_ID);
-        }
+
+        group.setScene(scenes[sceneIndex]);
+
         sceneIndex++;
     }
 

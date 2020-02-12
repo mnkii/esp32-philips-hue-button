@@ -15,10 +15,3 @@ char scenes[3][16] = { // 15 digit ids of the scenes you want the switch to iter
     "",
     ""
 };
-
-// Sonos Config
-#define AUDIO_URL "" // URL of audio file to play
-#define SONOS_CLIENT_CREDENTIALS "" // base64 encoded client_id:client_secret
-#define SONOS_ACCESS_TOKEN "" // These are tricky to generate - you will have to create your own sonos integration and then use the
-#define SONOS_REFRESH_TOKEN "" // API to generate the access and refresh token https://developer.sonos.com/reference/authorization-api/
-#define SONOS_ID "" // playerId - must be one which supports audioclip https://developer.sonos.com/reference/control-api/audioclip/
